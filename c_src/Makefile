@@ -1,3 +1,6 @@
+ifndef OUT
+override OUT = $(shell pwd)
+endif
 CC=gcc
 CFLAGS=-fPIC -O2
 TEST_LDFLAGS=$(shell pkg-config --cflags --libs check)
@@ -7,23 +10,23 @@ all:		lyon
 lyon:		soscascade agc sosfilters
 
 soscascade:	soscascade.c
-		$(CC) $(CFLAGS) -c soscascade.c
+		$(CC) $(CFLAGS) -c soscascade.c -o $(OUT)/soscascade.o
 
 agc:		agc.c
-		$(CC) $(CFLAGS) -c agc.c
+		$(CC) $(CFLAGS) -c agc.c -o $(OUT)/agc.o
 
 sosfilters:	sosfilters.c
-		$(CC) $(CFLAGS) -c sosfilters.c
+		$(CC) $(CFLAGS) -c sosfilters.c -o $(OUT)/sosfilters.o
 
 lib:		lyon
-		$(CC) -shared agc.o soscascade.o sosfilters.o -o liblyon.so
+		$(CC) -shared $(OUT)/agc.o $(OUT)/soscascade.o $(OUT)/sosfilters.o -o $(OUT)/liblyon.so
 
 test:		test.c lyon
-		$(CC) $(CFLAGS) test.c agc.o soscascade.o sosfilters.o -o lyon_test $(TEST_LDFLAGS)
-		./lyon_test
+		$(CC) $(CFLAGS) test.c $(OUT)/agc.o $(OUT)/soscascade.o $(OUT)/sosfilters.o -o $(OUT)/lyon_test $(TEST_LDFLAGS)
+		$(OUT)/lyon_test
 
 clean:
-		rm -f *.o lyon_test liblyon.so
+		rm -f $(OUT)/*.o $(OUT)/lyon_test $(OUT)/liblyon.so
 
 
 
