@@ -16,17 +16,24 @@ sudo apt-get install check
 ```
 
 ## Installation
-### Manual
-Build a library:
+### PIP
 
 ``` bash
-make lib
+pip install lyon
 ```
 
-This would result in `liblyon.so` shared library. Verify that library is properly built by running a test suite:
+### Manual
+Build a library and copy to installation location:
 
 ``` bash
-make test
+make -C c_src lib
+cp c_src/liblyon.so lyon/
+```
+
+you can verify that library is properly built by running a test suite:
+
+``` bash
+make -C c_src test
 ```
 
 ## Usage
