@@ -1,0 +1,3 @@
+include c_src/*.c
+include c_src/*.h
+include c_src/Makefile

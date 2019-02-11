@@ -24,12 +24,6 @@ class CustomBuild(build):
             self.copy_file(target, os.path.join(self.build_lib, 'lyon'))
 
 
-class CustomInstall(install):
-    def run(self):
-        install.run(self)
-        self.copy_tree(self.build_lib, self.install_lib)
-
-
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
@@ -45,6 +39,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/sciforce/lyon",
     packages=setuptools.find_packages(),
+    include_package_data=True,
     install_requires=['numpy'],
     classifiers=[
         "Programming Language :: Python :: 3",
@@ -52,5 +47,5 @@ setuptools.setup(
         "Operating System :: POSIX :: Linux",
         "Topic :: Multimedia :: Sound/Audio",
     ],
-    cmdclass={'build': CustomBuild, 'install': CustomInstall}
+    cmdclass={'build': CustomBuild}
 )
