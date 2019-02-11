@@ -7,7 +7,7 @@ from setuptools.command.install import install
 
 class CustomBuild(build):
     def run(self):
-        build.run()
+        build.run(self)
         build_path = os.path.abspath(self.build_temp)
         base_path = os.path.dirname(__file__)
         c_src_path = os.path.join(base_path, 'c_src')
@@ -16,11 +16,12 @@ class CustomBuild(build):
         def compile():
             call(cmd, cwd=c_src_path)
 
+        self.mkpath(self.build_temp)
         self.execute(compile, [], 'Building liblyon')
         self.mkpath(self.build_lib)
         if not self.dry_run:
             target = os.path.join(build_path, 'liblyon.so')
-            self.copy_file(target, self.build_lib)
+            self.copy_file(target, os.path.join(self.build_lib, 'lyon'))
 
 
 class CustomInstall(install):
@@ -38,11 +39,13 @@ setuptools.setup(
     version="1.0.0",
     maintainer="Dmytro Tkanov",
     maintainer_email="dtkanov@sciforce.solutions",
+    license='Apache License 2.0',
     description="Python port of Lyon's model from AuditoryToolbox",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/sciforce/lyon",
     packages=setuptools.find_packages(),
+    install_requires=['numpy']
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: Apache Software License",
