@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/sciforce/lyon.svg?branch=master)](https://travis-ci.org/sciforce/lyon)
+
 # Lyon's auditory model for Python
 Python port of Lyon's model calculation from Auditory Toolbox.
 Original version of Auditory Toolbox is written in C and MATLAB by Malcolm Slaney.
@@ -51,7 +53,7 @@ print(coch.shape)
 
 The code above should output shape of resulting auditory nerve response: `[<number of samples / decimation_factor>, 86]`.
 
-See `lyon_examples.py` for examples on running other functions.
+See `examples/lyon_examples.py` for examples on running other functions.
 
 ## Links
 * [AuditoryToolbox page](https://engineering.purdue.edu/~malcolm/interval/1998-010/)

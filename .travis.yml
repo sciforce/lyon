@@ -5,12 +5,11 @@ python:
   - '3.6'
   - '3.7'
 install:
+  - apt-get install check
   - pip install numpy
 script:
   - make -C c_src test
-  - make -C c_src clean
   - python setup.py sdist
-  - [ -f dist/lyon*.tar.gz ]
   - python setup.py bdist_wheel
   - pip install dist/lyon*.whl
-  - python lyon_examples.py
+  - python examples/lyon_examples.py
