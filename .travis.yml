@@ -3,9 +3,8 @@ language: python
 python:
   - '3.5'
   - '3.6'
-  - '3.7'
 install:
-  - sudo apt-get update && sudo apt-get upgrade
+  - sudo apt-get update
   - sudo apt-get install -y check
   - pip install numpy
 script:
