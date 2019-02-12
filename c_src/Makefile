@@ -2,7 +2,7 @@ ifndef OUT
 override OUT = $(shell pwd)
 endif
 CC=gcc
-CFLAGS=-fPIC -O2
+CFLAGS=-fPIC -O2 -std=c99
 TEST_LDFLAGS=$(shell pkg-config --cflags --libs check)
 
 all:		lyon
